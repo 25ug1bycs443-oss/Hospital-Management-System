@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tulsi Hospitals - Healthcare Services</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons & Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <!-- Core Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Bar (Screenshot #1 matched) -->
+  <nav class="navbar navbar-expand-lg navbar-dark hms-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fa-solid fa-square-h"></i> Tulsi Hospitals
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">DISCOVER TULSI HOSPITALS</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">About Us</a></li>
+              <li><a class="dropdown-item" href="#">Our History</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">FIND HOSPITAL</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="hospitals.html">By City</a></li>
+              <li><a class="dropdown-item" href="hospitals.html">All Facilities</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">MEDICAL SERVICES</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Cardiology</a></li>
+              <li><a class="dropdown-item" href="#">Neurology</a></li>
+              <li><a class="dropdown-item" href="#">Pediatrics</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">HEALTH LIBRARY</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Diseases & Conditions</a></li>
+              <li><a class="dropdown-item" href="#">Healthy Living Tips</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center gap-3">
+          <a href="index.html" class="btn btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;">
+            <i class="bi bi-house-door-fill"></i>
+          </a>
+          <a href="tel:+1800100200" class="btn btn-warning rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; background-color: #ff9f00; border: none; color: #fff;">
+            <i class="bi bi-telephone-fill"></i>
+          </a>
+          <a href="dashboard.html" class="btn btn-primary-hms" style="border-radius: 6px;">
+            Clinical Workspace <i class="bi bi-box-arrow-in-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <h1>Tulsi Hospitals Network</h1>
+      <p>Discover world-class healthcare facilities, advanced diagnostics, and unparalleled medical expertise near you.</p>
+      
+      <!-- Search bar matching Screenshot #1 -->
+      <div class="search-container mb-5">
+        <div class="search-input-wrapper">
+          <input type="text" id="public-search" placeholder="Search For Doctors, Specialities And Health Check Packages...">
+          <button class="search-btn" onclick="performPublicSearch()">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Actions Navigation Bar (Screenshot #1 matched) -->
+  <div class="container" style="position: relative; z-index: 100;">
+    <div class="floating-actions-bar">
+      <a href="#" class="floating-action-item" data-bs-toggle="modal" data-bs-target="#bookAppointmentModal">
+        Book Appointment <i class="bi bi-arrow-right-circle-fill"></i>
+      </a>
+      <a href="hospitals.html" class="floating-action-item">
+        Find Hospital <i class="bi bi-arrow-right-circle-fill"></i>
+      </a>
+      <a href="#" class="floating-action-item" onclick="alert('Book Health Check Packages available below!')">
+        Book Health Check <i class="bi bi-arrow-right-circle-fill"></i>
+      </a>
+      <a href="#" class="floating-action-item" onclick="alert('Connect with our top consultants immediately at: +1800 100 200')">
+        Get Expert Opinion <i class="bi bi-arrow-right-circle-fill"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Health Packages Section -->
+  <section class="container mt-5 pt-5">
+    <div class="section-title">
+      <h2>Health Check Packages</h2>
+      <p class="text-muted">Take control of your health with our customized screening packages</p>
+    </div>
+    
+    <div class="row g-4">
+      <!-- Card 1 -->
+      <div class="col-md-4">
+        <div class="package-card">
+          <div class="package-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+          <h3>Basic Heart Screening</h3>
+          <div class="package-price">$99.00</div>
+          <ul class="package-features">
+            <li><i class="bi bi-check-circle-fill"></i> ECG & Blood Pressure</li>
+            <li><i class="bi bi-check-circle-fill"></i> Cholesterol Profile</li>
+            <li><i class="bi bi-check-circle-fill"></i> Doctor Consultation</li>
+          </ul>
+          <button class="btn btn-secondary-hms w-100" data-bs-toggle="modal" data-bs-target="#bookAppointmentModal" onclick="setReason('Basic Heart Screening')">Book Package</button>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="col-md-4">
+        <div class="package-card">
+          <div class="package-icon" style="background-color: #f0fdf4; color: #22c55e;"><i class="bi bi-activity"></i></div>
+          <h3>Comprehensive Health Check</h3>
+          <div class="package-price">$249.00</div>
+          <ul class="package-features">
+            <li><i class="bi bi-check-circle-fill"></i> Full Blood Count</li>
+            <li><i class="bi bi-check-circle-fill"></i> Liver & Kidney Functions</li>
+            <li><i class="bi bi-check-circle-fill"></i> Chest X-Ray & Ultrasound</li>
+            <li><i class="bi bi-check-circle-fill"></i> Specialist Opinion</li>
+          </ul>
+          <button class="btn btn-secondary-hms w-100" data-bs-toggle="modal" data-bs-target="#bookAppointmentModal" onclick="setReason('Comprehensive Health Check')">Book Package</button>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="col-md-4">
+        <div class="package-card">
+          <div class="package-icon" style="background-color: #fff7ed; color: #f97316;"><i class="bi bi-shield-check"></i></div>
+          <h3>Senior Citizen Wellness</h3>
+          <div class="package-price">$189.00</div>
+          <ul class="package-features">
+            <li><i class="bi bi-check-circle-fill"></i> Bone Density Scan</li>
+            <li><i class="bi bi-check-circle-fill"></i> Diabetes Screening</li>
+            <li><i class="bi bi-check-circle-fill"></i> Vision & Hearing Tests</li>
+            <li><i class="bi bi-check-circle-fill"></i> Geriatrician Consult</li>
+          </ul>
+          <button class="btn btn-secondary-hms w-100" data-bs-toggle="modal" data-bs-target="#bookAppointmentModal" onclick="setReason('Senior Citizen Wellness')">Book Package</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Public Book Appointment Modal -->
+  <div class="modal fade" id="bookAppointmentModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-hms">
+        <div class="modal-header modal-header-hms">
+          <h5 class="modal-title"><i class="bi bi-calendar-check-fill me-2"></i> Book Patient Appointment</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="public-book-form">
+            <!-- Patient Select or Add -->
+            <div class="mb-3">
+              <label for="book-patient" class="form-label form-label-hms">Patient Name</label>
+              <select class="form-select form-control-hms" id="book-patient" required>
+                <option value="" disabled selected>Select registered patient</option>
+              </select>
+              <div class="form-text text-muted">Patient not registered? <a href="dashboard.html?tab=patients" class="text-primary">Click here to register first.</a></div>
+            </div>
+            <!-- Doctor Select -->
+            <div class="mb-3">
+              <label for="book-doctor" class="form-label form-label-hms">Consulting Doctor / Specialist</label>
+              <select class="form-select form-control-hms" id="book-doctor" required>
+                <option value="" disabled selected>Select specialist</option>
+              </select>
+            </div>
+            <!-- Hospital Select -->
+            <div class="mb-3">
+              <label for="book-hospital" class="form-label form-label-hms">Hospital Branch</label>
+              <select class="form-select form-control-hms" id="book-hospital">
+                <option value="Tulsi Premier Hospital">Tulsi Premier Hospital</option>
+                <option value="Tulsi Diagnostics Center">Tulsi Diagnostics Center</option>
+                <option value="Tulsi Sterling Hospital">Tulsi Sterling Hospital</option>
+                <option value="Tulsi Apollo Hospital">Tulsi Apollo Hospital</option>
+              </select>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="book-date" class="form-label form-label-hms">Preferred Date</label>
+                <input type="date" class="form-control form-control-hms" id="book-date" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="book-time" class="form-label form-label-hms">Preferred Time</label>
+                <input type="text" class="form-control form-control-hms" id="book-time" placeholder="e.g. 10:00 AM" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="book-reason" class="form-label form-label-hms">Reason for Appointment / Packages</label>
+              <input type="text" class="form-control form-control-hms" id="book-reason" placeholder="e.g. Health Package / Regular Review" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary-hms w-100 mt-2 justify-content-center">Confirm Appointment Booking</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="hms-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <h4><i class="fa-solid fa-square-h me-2"></i> Tulsi Hospitals</h4>
+          <p class="mt-3">A premium medical facilities network providing quality cardiac, neurologic, and general health services across the country.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h4>Medical Services</h4>
+          <ul class="footer-links">
+            <li><a href="#">Cardiology</a></li>
+            <li><a href="#">Neurology</a></li>
+            <li><a href="#">Pediatrics & Maternity</a></li>
+            <li><a href="#">Emergency Care</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h4>Emergency Contacts</h4>
+          <p><i class="bi bi-telephone-fill me-2"></i> Hotline: +1800 100 200</p>
+          <p><i class="bi bi-envelope-fill me-2"></i> Email: info@tulsihospitals.com</p>
+          <p><i class="bi bi-geo-alt-fill me-2"></i> Head Office: Ahmedabad, Gujarat, India</p>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p>&copy; 2026 Tulsi Hospitals. All Rights Reserved. DBMS Mini-Project Prototype Demo.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Load patients and doctors into dropdowns when modal is opened
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const patientsRes = await fetch('/api/patients');
+        const doctorsRes = await fetch('/api/doctors');
+
+        if (patientsRes.ok && doctorsRes.ok) {
+          const patients = await patientsRes.json();
+          const doctors = await doctorsRes.json();
+
+          const patientSelect = document.getElementById('book-patient');
+          const doctorSelect = document.getElementById('book-doctor');
+
+          patients.forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.patient_id;
+            opt.textContent = `${p.name} (${p.patient_id})`;
+            patientSelect.appendChild(opt);
+          });
+
+          doctors.forEach(d => {
+            const opt = document.createElement('option');
+            opt.value = d.doctor_id;
+            opt.textContent = `${d.name} - ${d.specialization}`;
+            doctorSelect.appendChild(opt);
+          });
+        }
+      } catch (e) {
+        console.error('Dropdown init error', e);
+      }
+    });
+
+    function setReason(reason) {
+      document.getElementById('book-reason').value = reason;
+    }
+
+    // Appointment Booking API Submission
+    document.getElementById('public-book-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const payload = {
+        patient_id: document.getElementById('book-patient').value,
+        doctor_id: document.getElementById('book-doctor').value,
+        hospital_name: document.getElementById('book-hospital').value,
+        date: document.getElementById('book-date').value,
+        time: document.getElementById('book-time').value,
+        reason: document.getElementById('book-reason').value,
+        status: 'PENDING'
+      };
+
+      try {
+        const response = await fetch('/api/appointments', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+          alert('Appointment booked successfully! Present this at the counter.');
+          const modal = bootstrap.Modal.getInstance(document.getElementById('bookAppointmentModal'));
+          modal.hide();
+          document.getElementById('public-book-form').reset();
+        } else {
+          const err = await response.json();
+          alert('Error: ' + err.error);
+        }
+      } catch (err) {
+        alert('Could not connect to API server.');
+      }
+    });
+
+    function performPublicSearch() {
+      const q = document.getElementById('public-search').value;
+      if (q.trim()) {
+        window.location.href = `/hospitals.html?q=${encodeURIComponent(q)}`;
+      } else {
+        alert('Please enter a query to search.');
+      }
+    }
+  </script>
+</body>
+</html>

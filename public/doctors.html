@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctors Directory - Tulsi Hospitals Portal</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons & Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <!-- Core & Dashboard Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/dashboard.css" rel="stylesheet">
+  <script>
+    fetch('/api/auth/session')
+      .then(res => res.json())
+      .then(data => {
+        if (!data.loggedIn) window.location.href = '/login.html';
+      });
+  </script>
+</head>
+<body id="doctors-page">
+
+  <div class="dashboard-wrapper">
+    <!-- Left Navigation Sidebar -->
+    <aside class="hms-sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <i class="fa-solid fa-square-h text-primary"></i>
+          <div>
+            Tulsi Hospitals
+            <span>Hospital Portal -></span>
+          </div>
+        </a>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="index.html" class="sidebar-link"><i class="bi bi-house-door"></i> Home (Portal)</a></li>
+        <li><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid"></i> Dashboard</a></li>
+        <li><a href="patients.html" class="sidebar-link"><i class="bi bi-people"></i> Patients</a></li>
+        <li><a href="doctors.html" class="sidebar-link active"><i class="bi bi-person-badge-fill"></i> Doctors</a></li>
+        <li><a href="appointments.html" class="sidebar-link"><i class="bi bi-calendar-check"></i> Appointments</a></li>
+        <li><a href="wards.html" class="sidebar-link"><i class="bi bi-hospital"></i> Wards & Beds</a></li>
+        <li><a href="hospitals.html" class="sidebar-link"><i class="bi bi-geo-alt"></i> Hospitals</a></li>
+        <li><a href="billing.html" class="sidebar-link"><i class="bi bi-credit-card"></i> Billing</a></li>
+      </ul>
+      <div class="sidebar-footer">
+        <button onclick="logoutAdmin()" class="btn btn-outline-danger w-100 rounded-pill py-2">
+          <i class="bi bi-box-arrow-right me-2"></i> Log Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- Workspace Panel -->
+    <main class="dashboard-content">
+      <!-- Topbar -->
+      <div class="workspace-topbar">
+        <div class="workspace-title"><i class="bi bi-person-badge-fill text-primary"></i> Doctors Directory</div>
+        <div class="topbar-actions">
+          <button class="topbar-btn topbar-btn-orange" data-bs-toggle="modal" data-bs-target="#addDoctorModal">
+            <i class="bi bi-plus-circle-fill"></i> Add New Specialist
+          </button>
+        </div>
+      </div>
+
+      <!-- Specialization Cards Grid -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-3">
+          <div class="metric-card-hms" style="border-left: 4px solid #3b82f6;">
+            <div class="metric-info">
+              <h4>Cardiology</h4>
+              <div class="metric-value fs-4" id="spec-cardio">0 Doctors</div>
+            </div>
+            <div class="metric-icon-box bg-light-blue"><i class="fa-solid fa-heart-pulse"></i></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="metric-card-hms" style="border-left: 4px solid #a855f7;">
+            <div class="metric-info">
+              <h4>Neurology</h4>
+              <div class="metric-value fs-4" id="spec-neuro">0 Doctors</div>
+            </div>
+            <div class="metric-icon-box bg-light-purple"><i class="fa-solid fa-brain"></i></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="metric-card-hms" style="border-left: 4px solid #22c55e;">
+            <div class="metric-info">
+              <h4>Pediatrics</h4>
+              <div class="metric-value fs-4" id="spec-pediatric">0 Doctors</div>
+            </div>
+            <div class="metric-icon-box bg-light-green"><i class="fa-solid fa-baby"></i></div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="metric-card-hms" style="border-left: 4px solid #f97316;">
+            <div class="metric-info">
+              <h4>General Medicine</h4>
+              <div class="metric-value fs-4" id="spec-general">0 Doctors</div>
+            </div>
+            <div class="metric-icon-box bg-light-orange"><i class="fa-solid fa-stethoscope"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="card-table-hms mb-4" style="padding: 15px 24px;">
+        <div class="row g-3 align-items-center">
+          <div class="col-md-6">
+            <div class="input-group" style="max-width: 450px;">
+              <span class="input-group-text bg-white border-end-0 text-muted"><i class="bi bi-search"></i></span>
+              <input type="text" id="doctor-search-input" class="form-control border-start-0" placeholder="Search by name or specialty..." onkeyup="searchDoctorsList()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Doctors Table -->
+      <div class="card-table-hms">
+        <div class="table-responsive">
+          <table class="table-hms">
+            <thead>
+              <tr>
+                <th>Doctor ID</th>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Experience (Years)</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="doctors-table-body">
+              <tr><td colspan="5" class="text-center">Loading doctor directory...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add Doctor Modal -->
+  <div class="modal fade" id="addDoctorModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-hms">
+        <div class="modal-header modal-header-hms">
+          <h5 class="modal-title"><i class="bi bi-person-plus-fill me-2"></i> Add New Specialist</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="add-doctor-form">
+            <div class="mb-3">
+              <label for="d-name" class="form-label form-label-hms">Doctor Name</label>
+              <input type="text" class="form-control form-control-hms" id="d-name" required placeholder="e.g. Dr. Suresh Iyer">
+            </div>
+            <div class="mb-3">
+              <label for="d-spec" class="form-label form-label-hms">Specialization</label>
+              <select class="form-select form-control-hms" id="d-spec" required>
+                <option value="" disabled selected>Select specialty</option>
+                <option value="Cardiologist">Cardiologist</option>
+                <option value="Neurologist">Neurologist</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Orthopedist">Orthopedist</option>
+                <option value="Gynecologist">Gynecologist</option>
+                <option value="General Medicine">General Medicine</option>
+                <option value="Dermatologist">Dermatologist</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="d-exp" class="form-label form-label-hms">Experience (Years)</label>
+              <input type="number" class="form-control form-control-hms" id="d-exp" required placeholder="e.g. 10">
+            </div>
+            <button type="submit" class="btn btn-primary-hms w-100 mt-2 justify-content-center">Save Specialist</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Doctor Modal -->
+  <div class="modal fade" id="editDoctorModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-content-hms">
+        <div class="modal-header modal-header-hms">
+          <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i> Edit Specialist details</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <form id="edit-doctor-form">
+            <input type="hidden" id="edit-d-id">
+            <div class="mb-3">
+              <label for="edit-d-name" class="form-label form-label-hms">Doctor Name</label>
+              <input type="text" class="form-control form-control-hms" id="edit-d-name" required>
+            </div>
+            <div class="mb-3">
+              <label for="edit-d-spec" class="form-label form-label-hms">Specialization</label>
+              <select class="form-select form-control-hms" id="edit-d-spec" required>
+                <option value="Cardiologist">Cardiologist</option>
+                <option value="Neurologist">Neurologist</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Orthopedist">Orthopedist</option>
+                <option value="Gynecologist">Gynecologist</option>
+                <option value="General Medicine">General Medicine</option>
+                <option value="Dermatologist">Dermatologist</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="edit-d-exp" class="form-label form-label-hms">Experience (Years)</label>
+              <input type="number" class="form-control form-control-hms" id="edit-d-exp" required>
+            </div>
+            <button type="submit" class="btn btn-primary-hms w-100 mt-2 justify-content-center">Update Specialist</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
